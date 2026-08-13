@@ -1,0 +1,12 @@
+# Vivado generated files
+*.cache/
+*.runs/
+*.hw/
+*.sim/
+*.ip_user_files/
+*.gen/
+
+# Vivado generated logs
+*.jou
+*.log
+*.str
