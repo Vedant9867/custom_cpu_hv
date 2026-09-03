@@ -68,9 +68,9 @@ module Alu_16_bit(
         .A(A),
         .B(operand_B),
         .is_signed(cmp_signed),
-        .GT(GT),
-        .LT(LT),
-        .EQ(EQ)
+        .BGT(GT),
+        .BLT(LT),
+        .BEQ(EQ)
     );
     
    wire [15:0] shift_result;
