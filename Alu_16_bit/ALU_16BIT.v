@@ -12,13 +12,14 @@ module Alu_16_bit(
     input  mul_signed,
     input  cmp_signed,
     output [15:0] Y,
-    output  carry_out,
+    output  carry_out,//this four flag c,v,z,n are output from add ,sub instruction means this will change its value after add or sub instruction
     output  overflow,
     output  zero,
     output  sign,
     output  GT,
     output  LT,
-    output  EQ
+    output  EQ,
+    output Z,N,V // this are the comparator flags required for branch instruction
 );
 
     wire [15:0] imm_16;
@@ -70,7 +71,10 @@ module Alu_16_bit(
         .is_signed(cmp_signed),
         .BGT(GT),
         .BLT(LT),
-        .BEQ(EQ)
+        .BEQ(EQ),
+        .Z(Z),
+        .N(N),
+        .V(V)
     );
     
    wire [15:0] shift_result;
@@ -110,7 +114,7 @@ module Alu_16_bit(
             4'b0100:result_reg = A ^ B;
             4'b0101: result_reg = ~A;
             4'b0110: result_reg = mul_result;
-            4'b0111: result_reg = 16'b0;
+            4'b0111: result_reg = 16'b0;//COMPARE
             4'b1000:  result_reg = shift_result;
             default: begin
                 result_reg = 16'b0;
