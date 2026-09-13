@@ -81,7 +81,7 @@ module Alu_16_bit(
     shifter_unit_combine shift1 (
         .data(A),
         .shift_amt(operand_B),
-        .shift_type(shift_type),//last bit of alu_sub_op denotes if operation is with B reg or imm
+        .shift_type(Shift_type),//last bit of alu_sub_op denotes if operation is with B reg or imm
         .out(shift_result)
     );
     reg [15:0] result_reg;
@@ -116,6 +116,7 @@ module Alu_16_bit(
             4'b0110: result_reg = mul_result;
             4'b0111: result_reg = 16'b0;//COMPARE
             4'b1000:  result_reg = shift_result;
+            4'b1001: result_reg = operand_B;//mov operation
             default: begin
                 result_reg = 16'b0;
                 carry_reg    = 1'b0;
